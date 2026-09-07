@@ -28,9 +28,10 @@ file and pushing; Vercel redeploys automatically. Most changes are data, not cod
 
 - **Types** for all content live in `lib/types.ts`. Match them exactly; extend the
   interface there rather than adding untyped fields.
-- **Derivation is already done** in `lib/content.ts` (projects sort featured-first
-  then newest-year; experience sorts newest-first, `present` floats to top). Don't
-  re-sort in components.
+- **Derivation is already done** in `lib/content.ts` (projects sort strictly
+  reverse-chronological by year — the site reads as a `git log`, so no
+  featured-first grouping; experience sorts newest-first, `present` floats to top).
+  Don't re-sort in components.
 - `lib/hash.ts` `shortHash()` produces the cosmetic git-style short SHA shown in the
   UI. It's deterministic and non-cryptographic — reuse it, don't reinvent it.
 
@@ -62,6 +63,11 @@ Rules:
 - `refresh-stats` is a **local** script. It is **not** part of the Vercel build —
   Vercel just builds the committed JSON. Don't wire it into CI expecting a
   deploy-time refresh.
+- The `activity` block (contribution-type breakdown: PRs / reviews / commits /
+  issues) is **manual and cannot be fetched live.** GitHub's API lumps all private
+  contributions into an untyped `restrictedContributionsCount` and never exposes
+  the per-type split, so the real breakdown (which is mostly private work) is only
+  visible on the signed-in profile page. Update it by hand; do not try to automate it.
 
 ## Code standards
 
