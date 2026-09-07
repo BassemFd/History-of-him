@@ -37,6 +37,9 @@ export interface Experience {
   summary: string;
   stack: string[];
   confidential: boolean;
+  // Curated emphasis — renders a "Flagship" badge and a filled node. Order is
+  // still driven by dates; this only changes visual weight.
+  flagship: boolean;
 }
 
 export interface ManualStat {
@@ -53,8 +56,19 @@ export interface LiveStats {
   followers: number;
 }
 
+export interface ActivityShare {
+  label: string;
+  pct: number;
+}
+
+export interface ActivityMix {
+  note: string;
+  breakdown: ActivityShare[];
+}
+
 export interface Stats {
   manual: ManualStat[];
+  activity: ActivityMix;
   liveFetchedAt: string;
   live: LiveStats;
 }

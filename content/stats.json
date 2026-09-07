@@ -1,18 +1,33 @@
 {
   "manual": [
     {
-      "label": "Commits in production systems",
-      "value": "976+",
-      "note": "Aggregate across private employer codebases",
+      "label": "Contributions",
+      "value": "3,000+",
+      "note": "Commits, PRs & code reviews since 2021 (public + private)",
+      "source": "manual"
+    },
+    {
+      "label": "PRs merged",
+      "value": "200+",
+      "note": "Tap to Pay — iOS & Android, across 3 repos",
       "source": "manual"
     },
     {
       "label": "Years shipping software",
       "value": "5+",
-      "note": "Since 2020",
+      "note": "Since 2021",
       "source": "manual"
     }
   ],
+  "activity": {
+    "note": "GitHub contribution activity — includes private repos",
+    "breakdown": [
+      { "label": "Pull requests", "pct": 42 },
+      { "label": "Code review", "pct": 34 },
+      { "label": "Commits", "pct": 21 },
+      { "label": "Issues", "pct": 3 }
+    ]
+  },
   "liveFetchedAt": "2026-09-04T10:05:18.421Z",
   "live": {
     "publicRepos": 8,
