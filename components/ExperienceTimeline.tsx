@@ -22,11 +22,24 @@ export default function ExperienceTimeline({
                 className="node-in relative"
                 style={{ animationDelay: `${i * 80}ms` }}
               >
-                <span className="absolute -left-[27px] top-1.5 h-3.5 w-3.5 rotate-45 border-2 border-accent bg-card" />
+                <span
+                  className={`absolute -left-[27px] top-1.5 h-3.5 w-3.5 rotate-45 border-2 border-accent ${
+                    e.flagship ? "bg-accent" : "bg-card"
+                  }`}
+                />
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <h3 className="font-display text-lg font-semibold tracking-tight">
+                  <h3
+                    className={`font-display font-semibold tracking-tight ${
+                      e.flagship ? "text-xl" : "text-lg"
+                    }`}
+                  >
                     {e.company}
                   </h3>
+                  {e.flagship && (
+                    <span className="rounded bg-accent px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-card">
+                      Flagship
+                    </span>
+                  )}
                   {e.confidential && (
                     <span className="rounded bg-accent-soft px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent">
                       Under NDA

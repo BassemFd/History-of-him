@@ -1,22 +1,35 @@
 [
   {
     "company": "eXalt-IT",
-    "role": "Fullstack Developer (Consultant)",
-    "start": "2024",
+    "role": "Fullstack Developer / Tech Lead (Consultant)",
+    "start": "Jun 2022",
     "end": "present",
     "location": "Paris",
-    "summary": "PLACEHOLDER — fill from LinkedIn. Consulting engagements building web and mobile products; internal engineering programs and client delivery.",
+    "summary": "Consulting firm (ESN) — client missions plus internal engineering. As technical referent: mentoring junior engineers, running technical qualifications and interviews, and authoring a React Native hiring test (Pixelator). Built an internal AI-agent application and championed engineering standards — clean code, SOLID, accessibility — across hexagonal Node.js/TypeScript projects.",
     "stack": ["TypeScript", "React", "React Native", "Node.js"],
-    "confidential": false
+    "confidential": false,
+    "flagship": false
   },
   {
     "company": "Planity",
-    "role": "Fullstack Developer",
-    "start": "PLACEHOLDER",
-    "end": "PLACEHOLDER",
+    "role": "Fullstack Developer — eXalt-IT mission",
+    "start": "Jun 2022",
+    "end": "Jun 2026",
     "location": "Paris",
-    "summary": "PLACEHOLDER — fill from LinkedIn. Contributed extensively to core production systems of a high-traffic booking platform (front end, backend services, and serverless functions).",
-    "stack": ["JavaScript", "React", "Node.js", "AWS Lambda"],
-    "confidential": true
+    "summary": "Four-year mission (via eXalt-IT) on France's leading beauty-booking platform. Owned the Tap to Pay contactless-payment feature end-to-end (iOS & Android — 18 months, 200+ PRs across 3 repos), built the passwordless Magic Link auth flow, and contributed to the planity.com rebuild and a monorepo serving mobile, tablet and web with multi-country i18n.",
+    "stack": ["React Native", "Node.js", "AWS Lambda", "Stripe Terminal"],
+    "confidential": true,
+    "flagship": true
+  },
+  {
+    "company": "Mon Spécialiste Auto",
+    "role": "Fullstack Developer",
+    "start": "Jun 2021",
+    "end": "Jun 2022",
+    "location": "Paris",
+    "summary": "Auto-inspection startup. Built web and mobile features across the pro dashboard and mobile app — new Node/Express API routes, role-based access with JOI validation, license-plate blurring via an AWS Lambda (Rekognition), interactive Google Maps mission tracking, and Cypress/testRigor E2E coverage.",
+    "stack": ["React", "Node.js", "Express", "MongoDB", "Cypress", "AWS Lambda"],
+    "confidential": false,
+    "flagship": false
   }
 ]
