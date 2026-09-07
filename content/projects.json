@@ -24,9 +24,9 @@
   {
     "slug": "neja",
     "title": "NeJa",
-    "blurb": "A component / design-system library built on Sanzo Wada's A Dictionary of Color Combinations — a presentation site pairing his historic palettes with ready-to-use UI components. Shipped in an afternoon.",
+    "blurb": "A component / design-system library built on Sanzo Wada's A Dictionary of Color Combinations — a presentation site pairing his historic palettes with variant-driven UI components. Shipped in an afternoon.",
     "role": "owner",
-    "stack": [],
+    "stack": ["TypeScript", "React", "Tailwind CSS", "CVA", "Vite"],
     "year": "2026",
     "links": { "github": "https://github.com/BassemFd/Neja", "live": null },
     "featured": false,
