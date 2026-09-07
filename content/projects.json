@@ -13,9 +13,9 @@
   {
     "slug": "funk-it-up",
     "title": "funk-it-up",
-    "blurb": "A rhythm game — jump in time with whatever track you're playing, scoring on how tightly you land on the beat.",
+    "blurb": "A 3D rhythm game — jump in time with whatever track you're playing, scoring on how tightly you land on the beat. Built on React Three Fiber with Rapier physics.",
     "role": "owner",
-    "stack": [],
+    "stack": ["TypeScript", "React Three Fiber", "Three.js", "Rapier", "GraphQL", "Zustand"],
     "year": "2026",
     "links": { "github": "https://github.com/BassemFd/funk-it-up", "live": null },
     "featured": false,
