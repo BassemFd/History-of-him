@@ -1,0 +1,23 @@
+{
+  "manual": [
+    {
+      "label": "Commits in production systems",
+      "value": "976+",
+      "note": "Aggregate across private employer codebases",
+      "source": "manual"
+    },
+    {
+      "label": "Years shipping software",
+      "value": "5+",
+      "note": "Since 2020",
+      "source": "manual"
+    }
+  ],
+  "liveFetchedAt": "2026-09-04T10:05:18.421Z",
+  "live": {
+    "publicRepos": 8,
+    "totalStars": 3,
+    "mergedPRs": 2,
+    "followers": 13
+  }
+}

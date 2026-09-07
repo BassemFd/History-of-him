@@ -1,0 +1,101 @@
+[
+  {
+    "slug": "stach-app",
+    "title": "Stach",
+    "blurb": "Hairdresser reservation platform — React Native mobile app with an Express/Node backend and a web front end. Book appointments, browse salons, manage availability.",
+    "role": "owner",
+    "stack": ["React Native", "Express", "Node.js", "MongoDB"],
+    "year": "2022",
+    "links": { "github": "https://github.com/BassemFd/Stach-App", "live": null },
+    "featured": true,
+    "category": "personal"
+  },
+  {
+    "slug": "locapic",
+    "title": "Locapic",
+    "blurb": "Real-time chat and geolocation app built with React Native and Socket.IO — share your live location and message nearby users.",
+    "role": "owner",
+    "stack": ["React Native", "Socket.IO", "Node.js"],
+    "year": "2022",
+    "links": { "github": "https://github.com/BassemFd/Locapic", "live": null },
+    "featured": true,
+    "category": "personal"
+  },
+  {
+    "slug": "my-moviz",
+    "title": "My-moviz",
+    "blurb": "A Netflix-style movie browsing app built in React — search titles, browse by category, and build a watchlist.",
+    "role": "owner",
+    "stack": ["React", "JavaScript"],
+    "year": "2022",
+    "links": { "github": "https://github.com/BassemFd/My-moviz", "live": null },
+    "featured": false,
+    "category": "personal"
+  },
+  {
+    "slug": "augmented-engineering",
+    "title": "Augmented Engineering — TS Backend",
+    "blurb": "A TypeScript backend starter exploring augmented-engineering workflows and modern Node service architecture.",
+    "role": "owner",
+    "stack": ["TypeScript", "Node.js"],
+    "year": "2026",
+    "links": { "github": "https://github.com/BassemFd/Augmented-Engineering-Back-Node-JS---BF", "live": null },
+    "featured": false,
+    "category": "personal"
+  },
+  {
+    "slug": "funk-it-up",
+    "title": "funk-it-up",
+    "blurb": "PLACEHOLDER — recent 2026 personal project. Add a one-line description of what it does.",
+    "role": "owner",
+    "stack": [],
+    "year": "2026",
+    "links": { "github": "https://github.com/BassemFd/funk-it-up", "live": null },
+    "featured": false,
+    "category": "personal"
+  },
+  {
+    "slug": "neja",
+    "title": "NeJa",
+    "blurb": "PLACEHOLDER — recent 2026 personal project. Add a one-line description of what it does.",
+    "role": "owner",
+    "stack": [],
+    "year": "2026",
+    "links": { "github": "https://github.com/BassemFd/Neja", "live": null },
+    "featured": false,
+    "category": "personal"
+  },
+  {
+    "slug": "komeet-tila",
+    "title": "Komeet (Tila)",
+    "blurb": "Contributed to a startup's mobile product and its API — feature development across a React Native app and its backend service.",
+    "role": "contributor",
+    "stack": ["React Native", "TypeScript", "Node.js"],
+    "year": "2026",
+    "links": { "github": null, "live": null },
+    "featured": true,
+    "category": "client"
+  },
+  {
+    "slug": "devrel-io",
+    "title": "DevRel.io Apps",
+    "blurb": "Internal developer-relations application suite built during an eXalt-IT engineering program (300+ commits). Rebuilt here as a case study since the source lives in a private GitLab org.",
+    "role": "owner",
+    "stack": ["TypeScript", "React", "Node.js"],
+    "year": "2024",
+    "links": { "github": null, "live": null },
+    "featured": false,
+    "category": "dojo"
+  },
+  {
+    "slug": "rendering-event-tdd",
+    "title": "Rendering Event (TDD Kata)",
+    "blurb": "A test-driven-development kata modelling an event-rendering domain — practicing clean design and red/green/refactor discipline.",
+    "role": "owner",
+    "stack": ["TypeScript", "Vitest"],
+    "year": "2024",
+    "links": { "github": null, "live": null },
+    "featured": false,
+    "category": "dojo"
+  }
+]

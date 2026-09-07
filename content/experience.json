@@ -1,0 +1,22 @@
+[
+  {
+    "company": "eXalt-IT",
+    "role": "Fullstack Developer (Consultant)",
+    "start": "2024",
+    "end": "present",
+    "location": "Paris",
+    "summary": "PLACEHOLDER — fill from LinkedIn. Consulting engagements building web and mobile products; internal engineering programs and client delivery.",
+    "stack": ["TypeScript", "React", "React Native", "Node.js"],
+    "confidential": false
+  },
+  {
+    "company": "Planity",
+    "role": "Fullstack Developer",
+    "start": "PLACEHOLDER",
+    "end": "PLACEHOLDER",
+    "location": "Paris",
+    "summary": "PLACEHOLDER — fill from LinkedIn. Contributed extensively to core production systems of a high-traffic booking platform (front end, backend services, and serverless functions).",
+    "stack": ["JavaScript", "React", "Node.js", "AWS Lambda"],
+    "confidential": true
+  }
+]

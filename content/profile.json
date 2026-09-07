@@ -1,0 +1,11 @@
+{
+  "name": "Bassem Fayed",
+  "tagline": "Fullstack Developer",
+  "summary": "Fullstack developer based in Paris. I build web and mobile products end to end — from Node/TypeScript APIs to React and React Native front ends.",
+  "location": "Paris, France",
+  "socials": {
+    "github": "https://github.com/BassemFd",
+    "linkedin": "https://www.linkedin.com/in/bassem-fd",
+    "email": "bassem.fayed@gmail.com"
+  }
+}
