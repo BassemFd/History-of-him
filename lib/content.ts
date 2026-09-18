@@ -2,10 +2,21 @@ import profileData from "@/content/profile.json";
 import projectsData from "@/content/projects.json";
 import experienceData from "@/content/experience.json";
 import statsData from "@/content/stats.json";
-import type { Profile, Project, Experience, Stats } from "./types";
+import educationData from "@/content/education.json";
+import certificationsData from "@/content/certifications.json";
+import type {
+  Profile,
+  Project,
+  Experience,
+  Stats,
+  Education,
+  Certification,
+} from "./types";
 
 export const profile = profileData as Profile;
 export const stats = statsData as Stats;
+export const education = educationData as Education[];
+export const certifications = certificationsData as Certification[];
 
 // Reverse-chronological, newest year first — the site reads as a `git log`, so
 // the order must be strictly by date (no featured-first grouping, which would

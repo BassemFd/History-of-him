@@ -42,6 +42,21 @@ export interface Experience {
   flagship: boolean;
 }
 
+export interface Education {
+  school: string;
+  degree: string;
+  period: string;
+  note: string;
+}
+
+export interface Certification {
+  name: string;
+  issuer: string;
+  issued: string;
+  expires: string;
+  credentialId: string;
+}
+
 export interface ManualStat {
   label: string;
   value: string;
