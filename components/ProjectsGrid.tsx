@@ -60,7 +60,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
           <span className="spine-line absolute left-[7px] top-2 bottom-2 w-px bg-rule" />
           <ol className="space-y-4">
             {shown.map((p) => (
-              <li key={p.slug} className="relative">
+              <li key={p.slug} className="crazy-item relative">
                 <span
                   className={`absolute -left-[27px] top-6 h-3.5 w-3.5 rounded-full border-2 bg-card ${CATEGORY_COLOR[p.category].border}`}
                 />

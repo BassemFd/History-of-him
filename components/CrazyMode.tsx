@@ -67,6 +67,19 @@ export default function CrazyMode() {
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
 
+  // Give every jittering block/card/row its own randomized duration + a
+  // negative delay (so it starts mid-cycle instead of all in lockstep) —
+  // set once via CSS custom properties, then the animation itself is pure
+  // CSS, no per-frame JS needed.
+  useEffect(() => {
+    if (reduced) return;
+    const items = document.querySelectorAll<HTMLElement>(".crazy-item");
+    items.forEach((el) => {
+      el.style.setProperty("--crazy-dur", `${1.8 + Math.random() * 1.8}s`);
+      el.style.setProperty("--crazy-delay", `${-Math.random() * 3}s`);
+    });
+  }, [reduced]);
+
   useEffect(() => {
     if (reduced) return;
     const container = containerRef.current;

@@ -78,7 +78,7 @@ function ActivityMixBlock({ activity }: { activity: ActivityMix }) {
 
       <div className="mt-6 flex flex-col gap-3">
         {activity.breakdown.map((a) => (
-          <div key={a.label} className="flex items-center gap-4">
+          <div key={a.label} className="crazy-item flex items-center gap-4">
             <div className="w-32 shrink-0 text-sm font-medium text-ink">
               {a.label}
             </div>
@@ -115,7 +115,7 @@ function StatRow({
   source: "manual" | "live";
 }) {
   return (
-    <div className="flex items-baseline justify-between gap-4 bg-card px-5 py-5">
+    <div className="crazy-item flex items-baseline justify-between gap-4 bg-card px-5 py-5">
       <div>
         <div className="text-sm font-medium text-ink">{label}</div>
         <div className="mt-0.5 flex items-center gap-2 font-mono text-[11px] text-muted">

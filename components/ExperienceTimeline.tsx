@@ -18,7 +18,7 @@ export default function ExperienceTimeline({
           <span className="spine-line absolute left-[7px] top-2 bottom-2 w-px bg-rule" />
           <ol className="space-y-6">
             {experience.map((e, i) => (
-              <li key={`${e.company}-${i}`} className="relative">
+              <li key={`${e.company}-${i}`} className="crazy-item relative">
                 <span
                   className={`absolute -left-[27px] top-1.5 h-3.5 w-3.5 rotate-45 border-2 border-accent ${
                     e.flagship ? "bg-accent" : "bg-card"

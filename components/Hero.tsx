@@ -47,7 +47,7 @@ export default function Hero({
             {recent.map((p, i) => (
               <li
                 key={p.slug}
-                className="flex items-baseline gap-3 px-4 py-2.5"
+                className="crazy-item flex items-baseline gap-3 px-4 py-2.5"
               >
                 <span className="text-accent">{shortHash(p.slug)}</span>
                 {i === 0 && (

@@ -15,7 +15,7 @@ export default function EducationSection({
 
         <ul className="mt-8 space-y-5">
           {education.map((e) => (
-            <li key={e.school}>
+            <li key={e.school} className="crazy-item">
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                 <h3 className="font-display text-lg font-semibold tracking-tight">
                   {e.school}
@@ -47,7 +47,7 @@ export default function EducationSection({
               {certifications.map((c) => (
                 <li
                   key={c.credentialId}
-                  className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 rounded-lg border border-rule bg-card px-5 py-4"
+                  className="crazy-item flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 rounded-lg border border-rule bg-card px-5 py-4"
                 >
                   <div>
                     <div className="text-sm font-medium text-ink">{c.name}</div>

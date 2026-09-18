@@ -12,12 +12,13 @@ const THEMES: { id: Theme; label: string }[] = [
 
 // Terminal-styled theme switch — mono, muted until active. "???" is the hidden
 // crazy-mode easter egg; picking it plays the vortex before the palette lands.
-// While crazy is active, "lgt"/"drk" glow — they're the only way out, and the
-// gutter itself sits above every chaos layer so they stay clickable and calm.
+// While crazy is active, "lgt"/"drk" grow and glow — they're the only way
+// out, and the gutter itself sits above every chaos layer so they stay
+// clickable and calm.
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   return (
-    <div className="flex items-center gap-1 font-mono text-xs">
+    <div className="flex items-center gap-1.5 font-mono text-xs">
       <span className="text-gutter-muted">theme:</span>
       {THEMES.map((t) => {
         const isExit = theme === "crazy" && t.id !== "crazy";
@@ -29,7 +30,7 @@ function ThemeToggle() {
             aria-pressed={isActive}
             className={
               isExit
-                ? "exit-glow rounded px-1.5 py-0.5 text-white"
+                ? "exit-glow rounded px-2.5 py-1 text-base font-bold text-white"
                 : isActive
                 ? "rounded px-1.5 py-0.5 text-accent"
                 : "rounded px-1.5 py-0.5 text-gutter-muted transition-colors hover:text-white"
@@ -54,19 +55,31 @@ const ROUTES: Route[] = [
 
 const HELP =
   "commands: log, shortlog, ls, formation, whoami, open <github|linkedin|email>, top, clear";
+const CRAZY_HELP = "PRESS LIGHT OR DARK THEME";
 
 // The gutter is the page's line-number column: a persistent index of the
 // sections in order, plus the command prompt that actually drives navigation.
 // On narrow screens it collapses to the same prompt as a bottom bar.
 export default function Gutter({ profile }: { profile: Profile }) {
+  const { theme } = useTheme();
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("type `help`");
+  const [urgent, setUrgent] = useState(false);
 
   function run(raw: string) {
     const line = raw.trim().toLowerCase();
     if (!line) return;
+    setUrgent(false);
 
-    if (line === "help") return setOutput(HELP);
+    if (line === "help") {
+      if (theme === "crazy") {
+        setUrgent(true);
+        setOutput(CRAZY_HELP);
+        return;
+      }
+      setOutput(HELP);
+      return;
+    }
     if (line === "clear") return setOutput("");
     if (line === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -96,6 +109,10 @@ export default function Gutter({ profile }: { profile: Profile }) {
     document.getElementById(route.id)?.scrollIntoView({ behavior: "smooth" });
     setOutput(`→ ${route.label}`);
   }
+
+  const outputClass = urgent
+    ? "animate-pulse font-mono text-xs font-bold text-manual"
+    : "font-mono text-xs text-gutter-muted";
 
   const prompt = (
     <div className="flex items-center gap-2 font-mono text-sm">
@@ -136,7 +153,7 @@ export default function Gutter({ profile }: { profile: Profile }) {
 
         <div className="border-t border-gutter-line pt-4">
           {prompt}
-          <p className="mt-2 truncate font-mono text-xs text-gutter-muted">{output}</p>
+          <p className={`mt-2 truncate ${outputClass}`}>{output}</p>
           <div className="mt-4 border-t border-gutter-line pt-3">
             <ThemeToggle />
           </div>
@@ -147,7 +164,7 @@ export default function Gutter({ profile }: { profile: Profile }) {
       <div className="fixed inset-x-0 bottom-0 z-[70] border-t border-gutter-line bg-gutter lg:hidden">
         <div className="flex items-center gap-3 px-6 py-3">
           {prompt}
-          <span className="hidden shrink-0 truncate text-xs text-gutter-muted sm:block">
+          <span className={`hidden shrink-0 truncate sm:block ${outputClass}`}>
             {output}
           </span>
           <div className="ml-auto shrink-0">

@@ -154,8 +154,9 @@ body {
   }
 }
 
-/* The only two buttons that get you out of crazy mode — they pulse so
-   they read as "click me" against everything else going haywire. */
+/* The only two buttons that get you out of crazy mode — they pulse and are
+   set larger in Gutter.tsx so they read as "click me" against everything
+   else going haywire. */
 .exit-glow {
   animation: crazy-toggle-glow 1.4s ease-in-out infinite;
 }
@@ -170,6 +171,80 @@ body {
     box-shadow: 0 0 12px 3px currentColor;
     text-shadow: 0 0 8px currentColor;
   }
+}
+
+/* Three tiers of "nothing stays put," each nested inside the last so their
+   transforms stack: whole blocks drift (header/sections/footer, desynced by
+   duration alone since they share one keyframe), item-level cards/rows jitter
+   faster (durations randomized per element in CrazyMode.tsx), and headings/
+   paragraphs shimmy on top of that — reusing the hero's rotoscope jitter
+   without its grayscale filter, so it doesn't wash out the palette. */
+[data-theme="crazy"] main > * {
+  animation: crazy-drift 5s ease-in-out infinite;
+}
+[data-theme="crazy"] main > *:nth-child(1) {
+  animation-duration: 4.3s;
+}
+[data-theme="crazy"] main > *:nth-child(2) {
+  animation-duration: 5.8s;
+}
+[data-theme="crazy"] main > *:nth-child(3) {
+  animation-duration: 3.9s;
+}
+[data-theme="crazy"] main > *:nth-child(4) {
+  animation-duration: 6.5s;
+}
+[data-theme="crazy"] main > *:nth-child(5) {
+  animation-duration: 5.1s;
+}
+[data-theme="crazy"] main > *:nth-child(6) {
+  animation-duration: 4.7s;
+}
+
+@keyframes crazy-drift {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  20% {
+    transform: translate(22px, -16px) rotate(-2.2deg);
+  }
+  40% {
+    transform: translate(-18px, 12px) rotate(2.6deg);
+  }
+  60% {
+    transform: translate(16px, 18px) rotate(-1.8deg);
+  }
+  80% {
+    transform: translate(-12px, -14px) rotate(2deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+[data-theme="crazy"] .crazy-item {
+  animation: crazy-jitter-item 2.4s ease-in-out infinite;
+  animation-duration: var(--crazy-dur, 2.4s);
+  animation-delay: var(--crazy-delay, 0s);
+}
+
+@keyframes crazy-jitter-item {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  30% {
+    transform: translate(10px, -8px) rotate(-3deg);
+  }
+  60% {
+    transform: translate(-9px, 7px) rotate(3deg);
+  }
+}
+
+[data-theme="crazy"] main h2,
+[data-theme="crazy"] main h3,
+[data-theme="crazy"] main p {
+  animation: rotoscope-jitter 0.32s steps(2, end) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -188,6 +263,13 @@ body {
     animation: none;
   }
   [data-theme="crazy"] .content-column {
+    animation: none;
+  }
+  [data-theme="crazy"] main > *,
+  [data-theme="crazy"] .crazy-item,
+  [data-theme="crazy"] main h2,
+  [data-theme="crazy"] main h3,
+  [data-theme="crazy"] main p {
     animation: none;
   }
   .exit-glow {
