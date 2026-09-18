@@ -1,4 +1,4 @@
-# porto-folie
+# career-log
 
 Personal developer portfolio for **Bassem Fayed** — a Next.js site that presents
 projects, GitHub stats, and career history as a continuous *commit log*.
@@ -86,7 +86,7 @@ That's it — Vercel rebuilds and the new card appears. Same flow for
 
 ## Deploy
 
-1. Push to `https://github.com/BassemFd/porto-folie`.
+1. Push to `https://github.com/BassemFd/career-log`.
 2. Import the repo on [Vercel](https://vercel.com/new) — it auto-detects Next.js.
 3. Deploy. Add a custom domain later if you want.
 
