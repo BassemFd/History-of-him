@@ -32,3 +32,8 @@ next-env.d.ts
 /dist/
 .vinext/
 .wrangler/
+
+# skill installer cache
+/.agents/
+/.claude/skills/
+skills-lock.json
