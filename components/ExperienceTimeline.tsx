@@ -41,7 +41,7 @@ export default function ExperienceTimeline({
                     </span>
                   )}
                   {e.confidential && (
-                    <span className="rounded bg-accent-soft px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent">
+                    <span className="rounded bg-manual-soft px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-manual">
                       Under NDA
                     </span>
                   )}

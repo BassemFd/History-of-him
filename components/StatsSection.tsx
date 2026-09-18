@@ -96,7 +96,7 @@ function ActivityMixBlock({ activity }: { activity: ActivityMix }) {
       </div>
 
       <p className="mt-3 flex items-center gap-2 font-mono text-[11px] text-muted">
-        <span>○ manual</span>
+        <span className="text-manual">○ manual</span>
         <span>{activity.note}</span>
       </p>
     </div>
@@ -119,7 +119,7 @@ function StatRow({
       <div>
         <div className="text-sm font-medium text-ink">{label}</div>
         <div className="mt-0.5 flex items-center gap-2 font-mono text-[11px] text-muted">
-          <span className={source === "live" ? "text-accent" : "text-muted"}>
+          <span className={source === "live" ? "text-live" : "text-manual"}>
             {source === "live" ? "● live" : "○ manual"}
           </span>
           <span>{note}</span>

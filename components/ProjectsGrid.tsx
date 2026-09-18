@@ -12,6 +12,15 @@ const FILTERS: { key: ProjectCategory | "all"; label: string }[] = [
   { key: "dojo", label: "Training" },
 ];
 
+// Each category gets its own hue — carried through the filter pill, the spine
+// node, and the short-hash color on the card, so color encodes what kind of
+// work it is rather than just decorating it.
+const CATEGORY_COLOR: Record<ProjectCategory, { text: string; border: string; bg: string }> = {
+  personal: { text: "text-accent", border: "border-accent", bg: "bg-accent-soft" },
+  client: { text: "text-teal", border: "border-teal", bg: "bg-teal-soft" },
+  dojo: { text: "text-violet", border: "border-violet", bg: "bg-violet-soft" },
+};
+
 // Projects as commit nodes on a branch line: each card hangs off the spine with
 // its short hash, so the section reads as a log of shipped work.
 export default function ProjectsGrid({ projects }: { projects: Project[] }) {
@@ -27,19 +36,23 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
         <SectionLabel index="02" title="Work log" />
 
         <div className="mt-6 flex flex-wrap gap-2 font-mono text-xs">
-          {FILTERS.map((f) => (
-            <button
-              key={f.key}
-              onClick={() => setFilter(f.key)}
-              className={`rounded-full border px-3 py-1 transition-colors ${
-                filter === f.key
-                  ? "border-accent bg-accent-soft text-accent"
-                  : "border-rule text-muted hover:border-accent hover:text-accent"
-              }`}
-            >
-              {f.label}
-            </button>
-          ))}
+          {FILTERS.map((f) => {
+            const color = f.key === "all" ? null : CATEGORY_COLOR[f.key];
+            const active = filter === f.key;
+            return (
+              <button
+                key={f.key}
+                onClick={() => setFilter(f.key)}
+                className={`rounded-full border px-3 py-1 transition-colors ${
+                  active
+                    ? `${color?.border ?? "border-accent"} ${color?.bg ?? "bg-accent-soft"} ${color?.text ?? "text-accent"}`
+                    : "border-rule text-muted hover:border-accent hover:text-accent"
+                }`}
+              >
+                {f.label}
+              </button>
+            );
+          })}
         </div>
 
         {/* the branch line */}
@@ -52,7 +65,9 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
                 className="node-in relative"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
-                <span className="absolute -left-[27px] top-6 h-3.5 w-3.5 rounded-full border-2 border-accent bg-card" />
+                <span
+                  className={`absolute -left-[27px] top-6 h-3.5 w-3.5 rounded-full border-2 bg-card ${CATEGORY_COLOR[p.category].border}`}
+                />
                 <ProjectCard project={p} />
               </li>
             ))}
@@ -78,7 +93,7 @@ function ProjectCard({ project: p }: { project: Project }) {
       }`}
     >
       <div className="flex items-baseline gap-3">
-        <span className="font-mono text-xs text-accent">
+        <span className={`font-mono text-xs ${CATEGORY_COLOR[p.category].text}`}>
           {shortHash(p.slug)}
         </span>
         <h3 className="font-display text-lg font-semibold tracking-tight">

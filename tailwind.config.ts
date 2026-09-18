@@ -15,6 +15,17 @@ export default {
         muted: "#6B7280",
         accent: "#1F4BFF",
         "accent-soft": "#E9EEFF",
+        // live data / present role — git "added" green
+        live: "#0E9F6E",
+        "live-soft": "#E1F9F0",
+        // manual data / confidential — amber, deliberately warm against the blue
+        manual: "#B45309",
+        "manual-soft": "#FDF1DE",
+        // project category accents
+        teal: "#0B7285",
+        "teal-soft": "#E1F3F6",
+        violet: "#7C3AED",
+        "violet-soft": "#F1EBFE",
       },
       fontFamily: {
         display: ["var(--font-display)", "ui-sans-serif", "system-ui"],
