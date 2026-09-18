@@ -8,9 +8,9 @@ export default function Home() {
   return (
     <main>
       <Hero profile={profile} recent={projects.slice(0, 4)} />
+      <ExperienceTimeline experience={experience} />
       <StatsSection stats={stats} />
       <ProjectsGrid projects={projects} />
-      <ExperienceTimeline experience={experience} />
 
       <footer className="mx-auto max-w-3xl px-6 py-10">
         <p className="font-mono text-xs text-muted">

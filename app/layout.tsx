@@ -26,6 +26,7 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: `${profile.name} — ${profile.tagline}`,
   description: profile.summary,
+  icons: { icon: "/favicon.svg" },
 };
 
 export default function RootLayout({
