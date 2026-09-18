@@ -51,7 +51,7 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="lg:flex lg:min-h-screen">
             <Gutter profile={profile} />
-            <div className="lg:min-w-0 lg:flex-1">
+            <div className="content-column relative z-[30] lg:min-w-0 lg:flex-1">
               <ScrollSkew>{children}</ScrollSkew>
             </div>
           </div>

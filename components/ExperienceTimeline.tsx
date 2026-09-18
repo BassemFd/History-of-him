@@ -1,5 +1,6 @@
 import type { Experience } from "@/lib/types";
 import { SectionLabel } from "./StatsSection";
+import GlitchText from "./GlitchText";
 
 // Experience on the same spine metaphor: each role is a tagged release on the
 // branch. Confidential roles render narrative only — no repo names, no links.
@@ -29,7 +30,7 @@ export default function ExperienceTimeline({
                       e.flagship ? "text-xl" : "text-lg"
                     }`}
                   >
-                    {e.company}
+                    <GlitchText text={e.company} />
                   </h3>
                   {e.flagship && (
                     <span className="rounded bg-accent px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-card">

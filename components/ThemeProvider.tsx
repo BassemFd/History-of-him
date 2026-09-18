@@ -7,8 +7,12 @@ import {
   useEffect,
   useState,
 } from "react";
-import VortexTransition from "./VortexTransition";
-import CrazyMode from "./CrazyMode";
+import dynamic from "next/dynamic";
+
+// three.js only ships to visitors who actually pick crazy mode, not every
+// recruiter who loads the default light/dark site.
+const VortexTransition = dynamic(() => import("./VortexTransition"), { ssr: false });
+const CrazyMode = dynamic(() => import("./CrazyMode"), { ssr: false });
 
 export type Theme = "light" | "dark" | "crazy";
 

@@ -82,8 +82,8 @@ html {
 }
 
 body {
-  background-color: rgb(var(--color-paper));
-  color: rgb(var(--color-ink));
+  background-color: rgb(var(--color-paper) / 1);
+  color: rgb(var(--color-ink) / 1);
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
@@ -128,15 +128,6 @@ body {
   }
 }
 
-@keyframes crazy-confetti-fall {
-  from {
-    transform: translateY(-10vh) rotate(0deg);
-  }
-  to {
-    transform: translateY(110vh) rotate(540deg);
-  }
-}
-
 @keyframes crazy-blob-wobble {
   0%,
   100% {
@@ -147,36 +138,37 @@ body {
   }
 }
 
-/* Anime power-up: a flash + expanding energy ring, held mostly idle so it
-   reads as an occasional burst rather than a constant pulse. */
-@keyframes crazy-powerup {
-  0%,
-  70%,
-  100% {
-    transform: scale(1);
-    opacity: 0;
+/* The readable content keeps drifting through hues while crazy mode runs —
+   the gutter (nav + theme toggle) is deliberately outside this wrapper, so
+   it stays a stable, unaffected "way out" against the chaos. */
+[data-theme="crazy"] .content-column {
+  animation: crazy-hue-cycle 6s linear infinite;
+}
+
+@keyframes crazy-hue-cycle {
+  from {
+    filter: hue-rotate(0deg);
   }
-  75% {
-    transform: scale(0.6);
-    opacity: 0.9;
-  }
-  90% {
-    transform: scale(2.4);
-    opacity: 0;
+  to {
+    filter: hue-rotate(360deg);
   }
 }
 
-@keyframes crazy-charge {
+/* The only two buttons that get you out of crazy mode — they pulse so
+   they read as "click me" against everything else going haywire. */
+.exit-glow {
+  animation: crazy-toggle-glow 1.4s ease-in-out infinite;
+}
+
+@keyframes crazy-toggle-glow {
   0%,
-  68%,
   100% {
-    transform: translateY(0) scaleY(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    text-shadow: none;
   }
-  78% {
-    transform: translateY(-6px) scaleY(1.08);
-  }
-  85% {
-    transform: translateY(0) scaleY(0.96);
+  50% {
+    box-shadow: 0 0 12px 3px currentColor;
+    text-shadow: 0 0 8px currentColor;
   }
 }
 
@@ -191,8 +183,16 @@ body {
     transition: none;
   }
   /* Reduced motion: keep crazy funky (palette + static doodles) but drop the
-     jitter/loops. Roaming/confetti are gated in the components themselves. */
+     jitter/loops. Roaming/scene motion is gated in the components themselves. */
   [data-theme="crazy"] h1 {
     animation: none;
+  }
+  [data-theme="crazy"] .content-column {
+    animation: none;
+  }
+  .exit-glow {
+    animation: none;
+    box-shadow: 0 0 8px 2px currentColor;
+    text-shadow: 0 0 6px currentColor;
   }
 }

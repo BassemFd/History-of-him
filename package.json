@@ -12,11 +12,13 @@
     "refresh-stats": "node scripts/refresh-github-stats.mjs"
   },
   "dependencies": {
+    "@types/three": "^0.186.0",
     "@vinext/cloudflare": "^1.0.0-beta.8",
     "next": "^15.5.4",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-server-dom-webpack": "^19.3.0",
+    "three": "^0.186.0",
     "vinext": "^1.0.0-beta.10"
   },
   "devDependencies": {

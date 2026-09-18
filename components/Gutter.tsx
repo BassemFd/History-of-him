@@ -12,25 +12,33 @@ const THEMES: { id: Theme; label: string }[] = [
 
 // Terminal-styled theme switch — mono, muted until active. "???" is the hidden
 // crazy-mode easter egg; picking it plays the vortex before the palette lands.
+// While crazy is active, "lgt"/"drk" glow — they're the only way out, and the
+// gutter itself sits above every chaos layer so they stay clickable and calm.
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   return (
     <div className="flex items-center gap-1 font-mono text-xs">
       <span className="text-gutter-muted">theme:</span>
-      {THEMES.map((t) => (
-        <button
-          key={t.id}
-          onClick={() => setTheme(t.id)}
-          aria-pressed={theme === t.id}
-          className={
-            theme === t.id
-              ? "rounded px-1.5 py-0.5 text-accent"
-              : "rounded px-1.5 py-0.5 text-gutter-muted transition-colors hover:text-white"
-          }
-        >
-          {t.label}
-        </button>
-      ))}
+      {THEMES.map((t) => {
+        const isExit = theme === "crazy" && t.id !== "crazy";
+        const isActive = theme === t.id;
+        return (
+          <button
+            key={t.id}
+            onClick={() => setTheme(t.id)}
+            aria-pressed={isActive}
+            className={
+              isExit
+                ? "exit-glow rounded px-1.5 py-0.5 text-white"
+                : isActive
+                ? "rounded px-1.5 py-0.5 text-accent"
+                : "rounded px-1.5 py-0.5 text-gutter-muted transition-colors hover:text-white"
+            }
+          >
+            {t.label}
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -110,7 +118,7 @@ export default function Gutter({ profile }: { profile: Profile }) {
   return (
     <>
       {/* Desktop: sticky sidebar, the file's real line-number index */}
-      <aside className="hidden shrink-0 lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-56 lg:flex-col lg:justify-between lg:border-r lg:border-gutter-line lg:bg-gutter lg:px-6 lg:py-8">
+      <aside className="hidden shrink-0 lg:sticky lg:top-0 lg:z-[70] lg:flex lg:h-screen lg:w-56 lg:flex-col lg:justify-between lg:border-r lg:border-gutter-line lg:bg-gutter lg:px-6 lg:py-8">
         <nav className="flex flex-col gap-1">
           {ROUTES.map((r) => (
             <button
@@ -136,7 +144,7 @@ export default function Gutter({ profile }: { profile: Profile }) {
       </aside>
 
       {/* Mobile / tablet: fixed bottom prompt */}
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-gutter-line bg-gutter lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-[70] border-t border-gutter-line bg-gutter lg:hidden">
         <div className="flex items-center gap-3 px-6 py-3">
           {prompt}
           <span className="hidden shrink-0 truncate text-xs text-gutter-muted sm:block">
