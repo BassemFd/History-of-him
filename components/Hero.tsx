@@ -1,5 +1,6 @@
 import type { Profile, Project } from "@/lib/types";
 import { shortHash } from "@/lib/hash";
+import CommitGraphBackdrop from "./CommitGraphBackdrop";
 
 // The hero opens like the top of a `git log --oneline`: the most recent work,
 // framed as HEAD. It doubles as proof-of-activity and a teaser for the log below.
@@ -13,8 +14,9 @@ export default function Hero({
   const handle = profile.socials.github.split("/").pop() ?? "";
 
   return (
-    <header className="border-b border-rule">
-      <div className="mx-auto max-w-3xl px-6 pt-16 pb-12 sm:pt-24 sm:pb-16">
+    <header className="relative overflow-hidden border-b border-rule">
+      <CommitGraphBackdrop />
+      <div className="relative mx-auto max-w-3xl px-6 pt-16 pb-12 sm:pt-24 sm:pb-16">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
           {profile.location}
         </p>
