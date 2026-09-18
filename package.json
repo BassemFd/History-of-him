@@ -3,24 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "vinext dev --port 3001",
+    "build": "vinext build",
+    "start": "wrangler dev --config dist/server/wrangler.json",
+    "deploy": "vinext-cloudflare deploy --config dist/server/wrangler.json",
     "lint": "next lint",
     "refresh-stats": "node scripts/refresh-github-stats.mjs"
   },
   "dependencies": {
+    "@vinext/cloudflare": "^1.0.0-beta.8",
     "next": "^15.5.4",
-    "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-server-dom-webpack": "^19.3.0",
+    "vinext": "^1.0.0-beta.10"
   },
   "devDependencies": {
-    "@types/node": "22.10.7",
+    "@cloudflare/vite-plugin": "^1.55.0",
+    "@types/node": "^26.6.1",
     "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3",
+    "@vitejs/plugin-react": "^6.1.1",
+    "@vitejs/plugin-rsc": "^0.5.35",
     "autoprefixer": "10.4.20",
     "postcss": "^8.5.28",
     "tailwindcss": "3.4.17",
-    "typescript": "5.7.3"
-  }
+    "typescript": "5.7.3",
+    "vite": "^8.3.0",
+    "wrangler": "^4.134.0"
+  },
+  "type": "module"
 }

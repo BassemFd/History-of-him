@@ -4,14 +4,14 @@ Personal developer portfolio for **Bassem Fayed** — a Next.js site that presen
 projects, GitHub stats, and career history as a continuous *commit log*.
 
 No database, no admin panel, no login. **All content is JSON in `/content`.** You
-update the site by editing a file and pushing to git; Vercel redeploys automatically.
+update the site by editing a file, then deploying to Cloudflare Workers.
 
 ## Run locally
 
 ```bash
 npm install
-npm run dev          # http://localhost:3000
-npm run build        # production build (run before deploying)
+npm run dev      # http://localhost:3001
+npm run build    # production build (run before deploying)
 ```
 
 ## The content model
@@ -52,7 +52,7 @@ Types for all of these live in `lib/types.ts`.
    git push
    ```
 
-That's it — Vercel rebuilds and the new card appears. Same flow for
+Commit, then run `npm run deploy` to publish. Same flow for
 `experience.json` (career) and `profile.json` (bio/links).
 
 ## Stats: manual vs live
@@ -86,10 +86,15 @@ That's it — Vercel rebuilds and the new card appears. Same flow for
 
 ## Deploy
 
-1. Push to `https://github.com/BassemFd/career-log`.
-2. Import the repo on [Vercel](https://vercel.com/new) — it auto-detects Next.js.
-3. Deploy. Add a custom domain later if you want.
+```bash
+npm run deploy
+```
+
+Builds with vinext and publishes to Cloudflare Workers via Wrangler. Requires
+`npx wrangler login` once per machine. Add a custom domain in the Cloudflare
+dashboard later if you want.
 
 ## Stack
 
-Next.js (App Router) · TypeScript · Tailwind CSS · deployed on Vercel.
+Next.js (App Router) · TypeScript · Tailwind CSS · deployed on Cloudflare
+Workers via [vinext](https://github.com/cloudflare/vinext).

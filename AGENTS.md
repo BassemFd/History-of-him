@@ -5,17 +5,18 @@ For the human-facing narrative, see `README.md` — this file does not repeat it
 
 ## What this is
 
-A content-driven Next.js (App Router) portfolio for Bassem Fayed. No database, no
-admin, no login. **Content is JSON in `/content`.** You change the site by editing a
-file and pushing; Vercel redeploys automatically. Most changes are data, not code.
+A content-driven Next.js (App Router) portfolio for Bassem Fayed, deployed to
+Cloudflare Workers via vinext. No database, no admin, no login. **Content is JSON
+in `/content`.** You change the site by editing a file, committing, and running
+`npm run deploy`. Most changes are data, not code.
 
 ## The core loop
 
 1. Edit the relevant file (usually one in `/content`).
-2. Run `npm run build` — it **must pass** before you commit. This is the same
-   command Vercel runs.
+2. Run `npm run build` — it **must pass** before you commit.
 3. Commit with a Conventional Commit message.
-4. Push to `main`. Vercel redeploys on its own.
+4. Push to `main`, then run `npm run deploy` to publish to Cloudflare
+   Workers. There is no deploy-on-push automation.
 
 ## Content model — where things live
 
@@ -60,8 +61,8 @@ Rules:
 - Never hand-edit the `live` block — run the script.
 - Never invent a "live total commits" figure: the public API doesn't expose a
   lifetime cross-repo commit count, so the site never claims one as live.
-- `refresh-stats` is a **local** script. It is **not** part of the Vercel build —
-  Vercel just builds the committed JSON. Don't wire it into CI expecting a
+- `refresh-stats` is a **local** script. It is **not** part of the build —
+  `npm run build` just builds the committed JSON. Don't wire it into CI expecting a
   deploy-time refresh.
 - The `activity` block (contribution-type breakdown: PRs / reviews / commits /
   issues) is **manual and cannot be fetched live.** GitHub's API lumps all private
@@ -98,5 +99,5 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`
 - `npm run build` passes locally.
 - The `live` stats block was changed **only** via `refresh-stats` (or not at all).
 - No confidential employer/client source named or linked.
-- Committed with a Conventional Commit message and pushed to `main` — Vercel
-  redeploys automatically.
+- Committed with a Conventional Commit message, pushed to `main`, and deployed
+  with `npm run deploy`.
