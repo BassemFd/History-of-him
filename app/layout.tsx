@@ -4,6 +4,11 @@ import "./globals.css";
 import { profile } from "@/lib/content";
 import Gutter from "@/components/Gutter";
 import ScrollSkew from "@/components/ScrollSkew";
+import ThemeProvider from "@/components/ThemeProvider";
+
+// Applies the saved (or system-preferred) theme before first paint, so there's
+// no flash of the wrong palette. Never resolves to crazy from the system pref.
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'&&t!=='crazy'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='light';}})();`;
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -39,13 +44,18 @@ export default function RootLayout({
       lang="en"
       className={`${display.variable} ${sans.variable} ${mono.variable}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="font-sans antialiased pb-14 lg:pb-0">
-        <div className="lg:flex lg:min-h-screen">
-          <Gutter profile={profile} />
-          <div className="lg:min-w-0 lg:flex-1">
-            <ScrollSkew>{children}</ScrollSkew>
+        <ThemeProvider>
+          <div className="lg:flex lg:min-h-screen">
+            <Gutter profile={profile} />
+            <div className="lg:min-w-0 lg:flex-1">
+              <ScrollSkew>{children}</ScrollSkew>
+            </div>
           </div>
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );

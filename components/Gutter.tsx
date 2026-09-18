@@ -2,6 +2,38 @@
 
 import { useState } from "react";
 import type { Profile } from "@/lib/types";
+import { useTheme, type Theme } from "./ThemeProvider";
+
+const THEMES: { id: Theme; label: string }[] = [
+  { id: "light", label: "lgt" },
+  { id: "dark", label: "drk" },
+  { id: "crazy", label: "???" },
+];
+
+// Terminal-styled theme switch — mono, muted until active. "???" is the hidden
+// crazy-mode easter egg; picking it plays the vortex before the palette lands.
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  return (
+    <div className="flex items-center gap-1 font-mono text-xs">
+      <span className="text-gutter-muted">theme:</span>
+      {THEMES.map((t) => (
+        <button
+          key={t.id}
+          onClick={() => setTheme(t.id)}
+          aria-pressed={theme === t.id}
+          className={
+            theme === t.id
+              ? "rounded px-1.5 py-0.5 text-accent"
+              : "rounded px-1.5 py-0.5 text-gutter-muted transition-colors hover:text-white"
+          }
+        >
+          {t.label}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 type Route = { cmd: string; alias: string[]; id: string; number: string; label: string };
 
@@ -97,6 +129,9 @@ export default function Gutter({ profile }: { profile: Profile }) {
         <div className="border-t border-gutter-line pt-4">
           {prompt}
           <p className="mt-2 truncate font-mono text-xs text-gutter-muted">{output}</p>
+          <div className="mt-4 border-t border-gutter-line pt-3">
+            <ThemeToggle />
+          </div>
         </div>
       </aside>
 
@@ -107,6 +142,9 @@ export default function Gutter({ profile }: { profile: Profile }) {
           <span className="hidden shrink-0 truncate text-xs text-gutter-muted sm:block">
             {output}
           </span>
+          <div className="ml-auto shrink-0">
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </>

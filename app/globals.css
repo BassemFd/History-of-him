@@ -2,8 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* Theme tokens as RGB triplets. tailwind.config.ts wraps these in
+   rgb(var(--color-x) / <alpha-value>), so utilities keep alpha support.
+   :root carries the light values so anything painted before the no-flash
+   script runs still lands on light — never crazy. */
+:root,
+[data-theme="light"] {
   color-scheme: light;
+  --color-paper: 246 247 249;
+  --color-card: 255 255 255;
+  --color-ink: 20 22 26;
+  --color-rule: 227 230 235;
+  --color-muted: 107 114 128;
+  --color-accent: 31 75 255;
+  --color-accent-soft: 233 238 255;
+  --color-live: 14 159 110;
+  --color-live-soft: 225 249 240;
+  --color-manual: 180 83 9;
+  --color-manual-soft: 253 241 222;
+  --color-teal: 11 114 133;
+  --color-teal-soft: 225 243 246;
+  --color-violet: 124 58 237;
+  --color-violet-soft: 241 235 254;
+  --color-gutter: 15 17 21;
+  --color-gutter-line: 36 40 51;
+  --color-gutter-muted: 107 114 128;
+}
+
+/* Dark: not the light hex on a dark bg — accents are lifted so live/manual/
+   teal/violet stay readably distinct against the dark surfaces. */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-paper: 22 24 29;
+  --color-card: 30 33 40;
+  --color-ink: 230 232 236;
+  --color-rule: 42 46 55;
+  --color-muted: 145 153 166;
+  --color-accent: 91 124 255;
+  --color-accent-soft: 30 37 71;
+  --color-live: 52 211 153;
+  --color-live-soft: 16 40 31;
+  --color-manual: 245 158 11;
+  --color-manual-soft: 51 40 15;
+  --color-teal: 34 184 207;
+  --color-teal-soft: 14 42 48;
+  --color-violet: 167 139 250;
+  --color-violet-soft: 36 26 61;
+  --color-gutter: 12 13 17;
+  --color-gutter-line: 42 46 55;
+  --color-gutter-muted: 145 153 166;
+}
+
+/* Crazy: 70s psychedelic — burnt orange, hot pink, mustard, deep purple,
+   teal. Cream ink on purple paper keeps body copy legible. */
+[data-theme="crazy"] {
+  color-scheme: dark;
+  --color-paper: 42 15 61;
+  --color-card: 58 22 82;
+  --color-ink: 255 232 176;
+  --color-rule: 124 45 107;
+  --color-muted: 227 158 201;
+  --color-accent: 255 45 149;
+  --color-accent-soft: 82 18 58;
+  --color-live: 6 214 160;
+  --color-live-soft: 10 61 48;
+  --color-manual: 255 122 24;
+  --color-manual-soft: 90 42 10;
+  --color-teal: 0 194 203;
+  --color-teal-soft: 7 62 66;
+  --color-violet: 199 125 255;
+  --color-violet-soft: 61 26 90;
+  --color-gutter: 26 7 38;
+  --color-gutter-line: 82 18 58;
+  --color-gutter-muted: 227 158 201;
 }
 
 html {
@@ -11,9 +82,10 @@ html {
 }
 
 body {
-  background-color: theme("colors.paper");
-  color: theme("colors.ink");
+  background-color: rgb(var(--color-paper));
+  color: rgb(var(--color-ink));
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* The commit spine draws itself in on load. */
@@ -31,11 +103,96 @@ body {
   animation: spine-draw 1.1s ease-out both;
 }
 
+/* ---- Crazy mode ---- */
+
+/* Rotoscope "Take On Me" look on the one hero heading: pencil-sketch contrast
+   plus a stepped micro-jitter, applied to the site's own type — no video. */
+[data-theme="crazy"] h1 {
+  filter: grayscale(0.45) contrast(1.5);
+  animation: rotoscope-jitter 0.26s steps(2, end) infinite;
+}
+
+@keyframes rotoscope-jitter {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(0.6px, -0.5px) rotate(-0.35deg);
+  }
+  50% {
+    transform: translate(-0.5px, 0.5px) rotate(0.35deg);
+  }
+  75% {
+    transform: translate(0.5px, 0.4px) rotate(-0.2deg);
+  }
+}
+
+@keyframes crazy-confetti-fall {
+  from {
+    transform: translateY(-10vh) rotate(0deg);
+  }
+  to {
+    transform: translateY(110vh) rotate(540deg);
+  }
+}
+
+@keyframes crazy-blob-wobble {
+  0%,
+  100% {
+    border-radius: 46% 54% 58% 42% / 54% 46% 54% 46%;
+  }
+  50% {
+    border-radius: 58% 42% 44% 56% / 44% 58% 42% 56%;
+  }
+}
+
+/* Anime power-up: a flash + expanding energy ring, held mostly idle so it
+   reads as an occasional burst rather than a constant pulse. */
+@keyframes crazy-powerup {
+  0%,
+  70%,
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  75% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  90% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes crazy-charge {
+  0%,
+  68%,
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+  78% {
+    transform: translateY(-6px) scaleY(1.08);
+  }
+  85% {
+    transform: translateY(0) scaleY(0.96);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .spine-line {
+    animation: none;
+  }
+  body {
+    transition: none;
+  }
+  /* Reduced motion: keep crazy funky (palette + static doodles) but drop the
+     jitter/loops. Roaming/confetti are gated in the components themselves. */
+  [data-theme="crazy"] h1 {
     animation: none;
   }
 }

@@ -7,29 +7,32 @@ export default {
   ],
   theme: {
     extend: {
+      // Tokens resolve to CSS custom properties (RGB triplets) defined per theme
+      // in app/globals.css, so every existing utility (bg-paper, text-ink, …)
+      // switches with [data-theme] without any call site changing.
       colors: {
-        paper: "#F6F7F9",
-        card: "#FFFFFF",
-        ink: "#14161A",
-        rule: "#E3E6EB",
-        muted: "#6B7280",
-        accent: "#1F4BFF",
-        "accent-soft": "#E9EEFF",
+        paper: "rgb(var(--color-paper) / <alpha-value>)",
+        card: "rgb(var(--color-card) / <alpha-value>)",
+        ink: "rgb(var(--color-ink) / <alpha-value>)",
+        rule: "rgb(var(--color-rule) / <alpha-value>)",
+        muted: "rgb(var(--color-muted) / <alpha-value>)",
+        accent: "rgb(var(--color-accent) / <alpha-value>)",
+        "accent-soft": "rgb(var(--color-accent-soft) / <alpha-value>)",
         // live data / present role — git "added" green
-        live: "#0E9F6E",
-        "live-soft": "#E1F9F0",
+        live: "rgb(var(--color-live) / <alpha-value>)",
+        "live-soft": "rgb(var(--color-live-soft) / <alpha-value>)",
         // manual data / confidential — amber, deliberately warm against the blue
-        manual: "#B45309",
-        "manual-soft": "#FDF1DE",
+        manual: "rgb(var(--color-manual) / <alpha-value>)",
+        "manual-soft": "rgb(var(--color-manual-soft) / <alpha-value>)",
         // project category accents
-        teal: "#0B7285",
-        "teal-soft": "#E1F3F6",
-        violet: "#7C3AED",
-        "violet-soft": "#F1EBFE",
+        teal: "rgb(var(--color-teal) / <alpha-value>)",
+        "teal-soft": "rgb(var(--color-teal-soft) / <alpha-value>)",
+        violet: "rgb(var(--color-violet) / <alpha-value>)",
+        "violet-soft": "rgb(var(--color-violet-soft) / <alpha-value>)",
         // the gutter — a structural dark sidebar, not a page-wide theme
-        gutter: "#0F1115",
-        "gutter-line": "#242833",
-        "gutter-muted": "#6B7280",
+        gutter: "rgb(var(--color-gutter) / <alpha-value>)",
+        "gutter-line": "rgb(var(--color-gutter-line) / <alpha-value>)",
+        "gutter-muted": "rgb(var(--color-gutter-muted) / <alpha-value>)",
       },
       fontFamily: {
         display: ["var(--font-display)", "ui-sans-serif", "system-ui"],
