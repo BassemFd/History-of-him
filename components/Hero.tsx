@@ -16,7 +16,7 @@ export default function Hero({
     <header className="border-b border-rule">
       <div className="mx-auto max-w-3xl px-6 pt-16 pb-12 sm:pt-24 sm:pb-16">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-          {profile.location} · Available for work
+          {profile.location}
         </p>
 
         <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">

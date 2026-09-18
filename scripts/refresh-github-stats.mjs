@@ -51,7 +51,6 @@ async function main() {
     publicRepos: user.public_repos,
     totalStars,
     mergedPRs: prs.total_count,
-    followers: user.followers,
   };
 
   const stats = JSON.parse(await readFile(STATS_PATH, "utf8"));

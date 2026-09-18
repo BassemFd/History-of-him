@@ -53,7 +53,6 @@ export interface LiveStats {
   publicRepos: number;
   totalStars: number;
   mergedPRs: number;
-  followers: number;
 }
 
 export interface ActivityShare {

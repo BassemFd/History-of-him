@@ -22,11 +22,6 @@ export default function StatsSection({ stats }: { stats: Stats }) {
       value: String(stats.live.totalStars),
       note: "on own projects",
     },
-    {
-      label: "Followers",
-      value: String(stats.live.followers),
-      note: "on GitHub",
-    },
   ];
 
   return (
@@ -124,13 +119,7 @@ function StatRow({
       <div>
         <div className="text-sm font-medium text-ink">{label}</div>
         <div className="mt-0.5 flex items-center gap-2 font-mono text-[11px] text-muted">
-          <span
-            className={
-              source === "live"
-                ? "text-accent"
-                : "text-muted"
-            }
-          >
+          <span className={source === "live" ? "text-accent" : "text-muted"}>
             {source === "live" ? "● live" : "○ manual"}
           </span>
           <span>{note}</span>
