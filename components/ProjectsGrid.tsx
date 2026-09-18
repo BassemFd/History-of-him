@@ -24,7 +24,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
   return (
     <section id="work" className="border-b border-rule">
       <div className="mx-auto max-w-3xl px-6 py-14">
-        <SectionLabel index="01" title="Work log" />
+        <SectionLabel index="02" title="Work log" />
 
         <div className="mt-6 flex flex-wrap gap-2 font-mono text-xs">
           {FILTERS.map((f) => (

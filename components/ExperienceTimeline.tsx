@@ -11,7 +11,7 @@ export default function ExperienceTimeline({
   return (
     <section id="experience" className="border-b border-rule">
       <div className="mx-auto max-w-3xl px-6 py-14">
-        <SectionLabel index="02" title="Releases" />
+        <SectionLabel index="00" title="Releases" />
 
         <div className="relative mt-8 pl-8">
           <span className="spine-line absolute left-[7px] top-2 bottom-2 w-px bg-rule" />

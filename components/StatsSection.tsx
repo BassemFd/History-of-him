@@ -27,7 +27,7 @@ export default function StatsSection({ stats }: { stats: Stats }) {
   return (
     <section id="stats" className="border-b border-rule">
       <div className="mx-auto max-w-3xl px-6 py-14">
-        <SectionLabel index="00" title="Shortlog" />
+        <SectionLabel index="01" title="Shortlog" />
 
         <div className="mt-8 grid gap-px overflow-hidden rounded-lg border border-rule bg-rule sm:grid-cols-2">
           {stats.manual.map((s) => (
