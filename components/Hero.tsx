@@ -16,15 +16,15 @@ export default function Hero({
   return (
     <header className="relative overflow-hidden border-b border-rule">
       <CommitGraphBackdrop />
-      <div className="relative mx-auto max-w-3xl px-6 pt-16 pb-12 sm:pt-24 sm:pb-16">
+      <div className="relative max-w-3xl px-6 pt-16 pb-12 sm:pt-24 sm:pb-16 lg:px-16">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
           {profile.location}
         </p>
 
-        <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
+        <h1 className="mt-5 font-display font-semibold leading-[0.95] tracking-tight text-[clamp(2.75rem,9vw,7rem)]">
           {profile.name}
         </h1>
-        <p className="mt-3 font-display text-xl text-accent sm:text-2xl">
+        <p className="mt-4 font-display text-2xl text-accent sm:text-3xl">
           {profile.tagline}
         </p>
 

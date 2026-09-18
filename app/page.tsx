@@ -3,7 +3,6 @@ import StatsSection from "@/components/StatsSection";
 import ProjectsGrid from "@/components/ProjectsGrid";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
 import EducationSection from "@/components/EducationSection";
-import TerminalNav from "@/components/TerminalNav";
 import { profile, projects, experience, stats, education, certifications } from "@/lib/content";
 
 export default function Home() {
@@ -15,7 +14,7 @@ export default function Home() {
       <ProjectsGrid projects={projects} />
       <EducationSection education={education} certifications={certifications} />
 
-      <footer className="mx-auto max-w-3xl px-6 py-10">
+      <footer className="max-w-3xl px-6 py-10 lg:px-16">
         <p className="font-mono text-xs text-muted">
           Built with Next.js · content lives in <span className="text-ink">/content/*.json</span> ·{" "}
           <a
@@ -28,8 +27,6 @@ export default function Home() {
           </a>
         </p>
       </footer>
-
-      <TerminalNav profile={profile} />
     </main>
   );
 }

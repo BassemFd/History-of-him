@@ -10,8 +10,8 @@ export default function EducationSection({
 }) {
   return (
     <section id="formation" className="border-b border-rule">
-      <div className="mx-auto max-w-3xl px-6 py-14">
-        <SectionLabel index="03" title="Formation" />
+      <div className="max-w-3xl px-6 py-14 lg:px-16">
+        <SectionLabel title="Formation" />
 
         <ul className="mt-8 space-y-5">
           {education.map((e) => (

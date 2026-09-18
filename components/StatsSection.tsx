@@ -26,8 +26,8 @@ export default function StatsSection({ stats }: { stats: Stats }) {
 
   return (
     <section id="stats" className="border-b border-rule">
-      <div className="mx-auto max-w-3xl px-6 py-14">
-        <SectionLabel index="01" title="Shortlog" />
+      <div className="max-w-3xl px-6 py-14 lg:px-16">
+        <SectionLabel title="Shortlog" />
 
         <div className="mt-8 grid gap-px overflow-hidden rounded-lg border border-rule bg-rule sm:grid-cols-2">
           {stats.manual.map((s) => (
@@ -70,7 +70,7 @@ function ActivityMixBlock({ activity }: { activity: ActivityMix }) {
   return (
     <div className="mt-12">
       <div className="flex items-center gap-3">
-        <h3 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-ink">
+        <h3 className="font-display text-base font-semibold text-ink">
           Activity mix
         </h3>
         <span className="h-px flex-1 bg-rule" />
@@ -132,17 +132,10 @@ function StatRow({
   );
 }
 
-export function SectionLabel({
-  index,
-  title,
-}: {
-  index: string;
-  title: string;
-}) {
+export function SectionLabel({ title }: { title: string }) {
   return (
-    <div className="flex items-center gap-3">
-      <span className="font-mono text-xs text-accent">{index}</span>
-      <h2 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-ink">
+    <div className="flex items-center gap-4">
+      <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">
         {title}
       </h2>
       <span className="h-px flex-1 bg-rule" />

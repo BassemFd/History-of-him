@@ -10,18 +10,14 @@ export default function ExperienceTimeline({
 }) {
   return (
     <section id="experience" className="border-b border-rule">
-      <div className="mx-auto max-w-3xl px-6 py-14">
-        <SectionLabel index="00" title="Releases" />
+      <div className="max-w-3xl px-6 py-14 lg:px-16">
+        <SectionLabel title="Releases" />
 
         <div className="relative mt-8 pl-8">
           <span className="spine-line absolute left-[7px] top-2 bottom-2 w-px bg-rule" />
           <ol className="space-y-6">
             {experience.map((e, i) => (
-              <li
-                key={`${e.company}-${i}`}
-                className="node-in relative"
-                style={{ animationDelay: `${i * 80}ms` }}
-              >
+              <li key={`${e.company}-${i}`} className="relative">
                 <span
                   className={`absolute -left-[27px] top-1.5 h-3.5 w-3.5 rotate-45 border-2 border-accent ${
                     e.flagship ? "bg-accent" : "bg-card"

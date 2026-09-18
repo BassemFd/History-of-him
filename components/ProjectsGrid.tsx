@@ -32,8 +32,8 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
 
   return (
     <section id="work" className="border-b border-rule">
-      <div className="mx-auto max-w-3xl px-6 py-14">
-        <SectionLabel index="02" title="Work log" />
+      <div className="max-w-3xl px-6 py-14 lg:px-16">
+        <SectionLabel title="Work log" />
 
         <div className="mt-6 flex flex-wrap gap-2 font-mono text-xs">
           {FILTERS.map((f) => {
@@ -59,12 +59,8 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
         <div className="relative mt-8 pl-8">
           <span className="spine-line absolute left-[7px] top-2 bottom-2 w-px bg-rule" />
           <ol className="space-y-4">
-            {shown.map((p, i) => (
-              <li
-                key={p.slug}
-                className="node-in relative"
-                style={{ animationDelay: `${i * 60}ms` }}
-              >
+            {shown.map((p) => (
+              <li key={p.slug} className="relative">
                 <span
                   className={`absolute -left-[27px] top-6 h-3.5 w-3.5 rounded-full border-2 bg-card ${CATEGORY_COLOR[p.category].border}`}
                 />

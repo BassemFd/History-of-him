@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import profile from "@/content/profile.json";
+import { profile } from "@/lib/content";
+import Gutter from "@/components/Gutter";
+import ScrollSkew from "@/components/ScrollSkew";
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -37,7 +39,14 @@ export default function RootLayout({
       lang="en"
       className={`${display.variable} ${sans.variable} ${mono.variable}`}
     >
-      <body className="font-sans antialiased pb-14">{children}</body>
+      <body className="font-sans antialiased pb-14 lg:pb-0">
+        <div className="lg:flex lg:min-h-screen">
+          <Gutter profile={profile} />
+          <div className="lg:min-w-0 lg:flex-1">
+            <ScrollSkew>{children}</ScrollSkew>
+          </div>
+        </div>
+      </body>
     </html>
   );
 }

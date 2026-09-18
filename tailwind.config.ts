@@ -26,6 +26,10 @@ export default {
         "teal-soft": "#E1F3F6",
         violet: "#7C3AED",
         "violet-soft": "#F1EBFE",
+        // the gutter — a structural dark sidebar, not a page-wide theme
+        gutter: "#0F1115",
+        "gutter-line": "#242833",
+        "gutter-muted": "#6B7280",
       },
       fontFamily: {
         display: ["var(--font-display)", "ui-sans-serif", "system-ui"],
