@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import type { Profile } from "@/lib/types";
 import { useTheme, type Theme } from "./ThemeProvider";
+import { useLocale } from "./LocaleProvider";
+import { contentByLocale } from "@/lib/content";
+import { STRINGS, type Locale } from "@/lib/strings";
 
 const THEMES: { id: Theme; label: string }[] = [
   { id: "light", label: "lgt" },
@@ -15,18 +17,18 @@ const THEMES: { id: Theme; label: string }[] = [
 // While crazy is active, "lgt"/"drk" grow and glow — they're the only way
 // out, and the gutter itself sits above every chaos layer so they stay
 // clickable and calm.
-function ThemeToggle() {
+function ThemeToggle({ t }: { t: (typeof STRINGS)["en"] }) {
   const { theme, setTheme } = useTheme();
   return (
     <div className="flex items-center gap-1.5 font-mono text-xs">
-      <span className="text-gutter-muted">theme:</span>
-      {THEMES.map((t) => {
-        const isExit = theme === "crazy" && t.id !== "crazy";
-        const isActive = theme === t.id;
+      <span className="text-gutter-muted">{t.themeLabel}</span>
+      {THEMES.map((th) => {
+        const isExit = theme === "crazy" && th.id !== "crazy";
+        const isActive = theme === th.id;
         return (
           <button
-            key={t.id}
-            onClick={() => setTheme(t.id)}
+            key={th.id}
+            onClick={() => setTheme(th.id)}
             aria-pressed={isActive}
             className={
               isExit
@@ -36,7 +38,7 @@ function ThemeToggle() {
                 : "rounded px-1.5 py-0.5 text-gutter-muted transition-colors hover:text-white"
             }
           >
-            {t.label}
+            {th.label}
           </button>
         );
       })}
@@ -44,26 +46,61 @@ function ThemeToggle() {
   );
 }
 
-type Route = { cmd: string; alias: string[]; id: string; number: string; label: string };
-
-const ROUTES: Route[] = [
-  { cmd: "log", alias: ["releases", "experience"], id: "experience", number: "00", label: "Releases" },
-  { cmd: "shortlog", alias: ["stats"], id: "stats", number: "01", label: "Shortlog" },
-  { cmd: "ls", alias: ["work", "projects"], id: "work", number: "02", label: "Work log" },
-  { cmd: "formation", alias: ["education", "certs"], id: "formation", number: "03", label: "Formation" },
+const LOCALES: { id: Locale; label: string }[] = [
+  { id: "en", label: "en" },
+  { id: "fr", label: "fr" },
 ];
 
-const HELP =
-  "commands: log, shortlog, ls, formation, whoami, open <github|linkedin|email>, top, clear";
-const CRAZY_HELP = "PRESS LIGHT OR DARK THEME";
+function LangToggle({ t }: { t: (typeof STRINGS)["en"] }) {
+  const { locale, setLocale } = useLocale();
+  return (
+    <div className="mt-2 flex items-center gap-1.5 font-mono text-xs">
+      <span className="text-gutter-muted">{t.langLabel}</span>
+      {LOCALES.map((l) => (
+        <button
+          key={l.id}
+          onClick={() => setLocale(l.id)}
+          aria-pressed={locale === l.id}
+          className={
+            locale === l.id
+              ? "rounded px-1.5 py-0.5 text-accent"
+              : "rounded px-1.5 py-0.5 text-gutter-muted transition-colors hover:text-white"
+          }
+        >
+          {l.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+type Route = { cmd: string; alias: string[]; id: string; number: string };
+
+const ROUTES: Route[] = [
+  { cmd: "log", alias: ["releases", "experience"], id: "experience", number: "00" },
+  { cmd: "shortlog", alias: ["stats"], id: "stats", number: "01" },
+  { cmd: "ls", alias: ["work", "projects"], id: "work", number: "02" },
+  { cmd: "formation", alias: ["education", "certs"], id: "formation", number: "03" },
+];
 
 // The gutter is the page's line-number column: a persistent index of the
 // sections in order, plus the command prompt that actually drives navigation.
 // On narrow screens it collapses to the same prompt as a bottom bar.
-export default function Gutter({ profile }: { profile: Profile }) {
+export default function Gutter() {
   const { theme } = useTheme();
+  const { locale } = useLocale();
+  const t = STRINGS[locale];
+  const profile = contentByLocale[locale].profile;
+
+  const routeLabels: Record<string, string> = {
+    experience: t.sectionReleases,
+    stats: t.sectionShortlog,
+    work: t.sectionWorklog,
+    formation: t.sectionFormation,
+  };
+
   const [input, setInput] = useState("");
-  const [output, setOutput] = useState("type `help`");
+  const [output, setOutput] = useState(t.typeHelp);
   const [urgent, setUrgent] = useState(false);
 
   function run(raw: string) {
@@ -74,16 +111,16 @@ export default function Gutter({ profile }: { profile: Profile }) {
     if (line === "help") {
       if (theme === "crazy") {
         setUrgent(true);
-        setOutput(CRAZY_HELP);
+        setOutput(t.crazyHelp);
         return;
       }
-      setOutput(HELP);
+      setOutput(t.help);
       return;
     }
     if (line === "clear") return setOutput("");
     if (line === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
-      return setOutput("↑ top");
+      return setOutput(t.topFeedback);
     }
     if (line === "whoami") return setOutput(profile.summary);
 
@@ -93,7 +130,7 @@ export default function Gutter({ profile }: { profile: Profile }) {
       const url =
         key === "email" ? `mailto:${profile.socials.email}` : profile.socials[key];
       window.open(url, "_blank");
-      return setOutput(`opening ${key}…`);
+      return setOutput(t.openingFeedback(key));
     }
 
     const route = ROUTES.find((r) => r.cmd === line || r.alias.includes(line));
@@ -102,12 +139,12 @@ export default function Gutter({ profile }: { profile: Profile }) {
       return;
     }
 
-    setOutput(`command not found: ${raw} — try \`help\``);
+    setOutput(t.commandNotFound(raw));
   }
 
   function goTo(route: Route) {
     document.getElementById(route.id)?.scrollIntoView({ behavior: "smooth" });
-    setOutput(`→ ${route.label}`);
+    setOutput(t.goToFeedback(routeLabels[route.id]));
   }
 
   const outputClass = urgent
@@ -145,7 +182,7 @@ export default function Gutter({ profile }: { profile: Profile }) {
             >
               <span className="font-mono text-xs text-accent">{r.number}</span>
               <span className="font-display text-sm text-white/70 group-hover:text-white">
-                {r.label}
+                {routeLabels[r.id]}
               </span>
             </button>
           ))}
@@ -155,7 +192,8 @@ export default function Gutter({ profile }: { profile: Profile }) {
           {prompt}
           <p className={`mt-2 truncate ${outputClass}`}>{output}</p>
           <div className="mt-4 border-t border-gutter-line pt-3">
-            <ThemeToggle />
+            <ThemeToggle t={t} />
+            <LangToggle t={t} />
           </div>
         </div>
       </aside>
@@ -167,8 +205,9 @@ export default function Gutter({ profile }: { profile: Profile }) {
           <span className={`hidden shrink-0 truncate sm:block ${outputClass}`}>
             {output}
           </span>
-          <div className="ml-auto shrink-0">
-            <ThemeToggle />
+          <div className="ml-auto shrink-0 text-right">
+            <ThemeToggle t={t} />
+            <LangToggle t={t} />
           </div>
         </div>
       </div>

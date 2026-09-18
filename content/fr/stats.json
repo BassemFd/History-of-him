@@ -1,0 +1,37 @@
+{
+  "manual": [
+    {
+      "label": "Contributions",
+      "value": "3 000+",
+      "note": "Commits, PR & revues de code depuis 2021 (public + privé)",
+      "source": "manual"
+    },
+    {
+      "label": "PR fusionnées",
+      "value": "200+",
+      "note": "Tap to Pay — iOS & Android, sur 3 dépôts",
+      "source": "manual"
+    },
+    {
+      "label": "Années à livrer du logiciel",
+      "value": "5+",
+      "note": "Depuis 2021",
+      "source": "manual"
+    }
+  ],
+  "activity": {
+    "note": "Activité de contribution GitHub — dépôts privés inclus",
+    "breakdown": [
+      { "label": "Pull requests", "pct": 42 },
+      { "label": "Revue de code", "pct": 34 },
+      { "label": "Commits", "pct": 21 },
+      { "label": "Issues", "pct": 3 }
+    ]
+  },
+  "liveFetchedAt": "2026-09-04T10:05:18.421Z",
+  "live": {
+    "publicRepos": 8,
+    "totalStars": 3,
+    "mergedPRs": 2
+  }
+}

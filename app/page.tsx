@@ -1,29 +1,38 @@
+"use client";
+
 import Hero from "@/components/Hero";
 import StatsSection from "@/components/StatsSection";
 import ProjectsGrid from "@/components/ProjectsGrid";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
 import EducationSection from "@/components/EducationSection";
-import { profile, projects, experience, stats, education, certifications } from "@/lib/content";
+import { contentByLocale } from "@/lib/content";
+import { STRINGS } from "@/lib/strings";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function Home() {
+  const { locale } = useLocale();
+  const { profile, projects, experience, stats, education, certifications } =
+    contentByLocale[locale];
+  const t = STRINGS[locale];
+
   return (
     <main>
       <Hero profile={profile} recent={projects.slice(0, 4)} />
-      <ExperienceTimeline experience={experience} />
-      <StatsSection stats={stats} />
-      <ProjectsGrid projects={projects} />
-      <EducationSection education={education} certifications={certifications} />
+      <ExperienceTimeline experience={experience} t={t} />
+      <StatsSection stats={stats} t={t} />
+      <ProjectsGrid projects={projects} t={t} />
+      <EducationSection education={education} certifications={certifications} t={t} />
 
       <footer className="max-w-3xl px-6 py-10 lg:px-16">
         <p className="font-mono text-xs text-muted">
-          Built with Next.js · content lives in <span className="text-ink">/content/*.json</span> ·{" "}
+          {t.footerBuiltWith} <span className="text-ink">{t.footerContentLives}</span> ·{" "}
           <a
             href={profile.socials.github}
             className="underline decoration-rule underline-offset-4 hover:text-accent"
             target="_blank"
             rel="noreferrer"
           >
-            source
+            {t.footerSource}
           </a>
         </p>
       </footer>

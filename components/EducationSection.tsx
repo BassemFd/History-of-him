@@ -1,17 +1,20 @@
 import type { Education, Certification } from "@/lib/types";
+import type { STRINGS } from "@/lib/strings";
 import { SectionLabel } from "./StatsSection";
 
 export default function EducationSection({
   education,
   certifications,
+  t,
 }: {
   education: Education[];
   certifications: Certification[];
+  t: (typeof STRINGS)["en"];
 }) {
   return (
     <section id="formation" className="border-b border-rule">
       <div className="max-w-3xl px-6 py-14 lg:px-16">
-        <SectionLabel title="Formation" />
+        <SectionLabel title={t.sectionFormation} />
 
         <ul className="mt-8 space-y-5">
           {education.map((e) => (
@@ -38,7 +41,7 @@ export default function EducationSection({
           <div className="mt-12">
             <div className="flex items-center gap-3">
               <h3 className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-ink">
-                Certifications
+                {t.certifications}
               </h3>
               <span className="h-px flex-1 bg-rule" />
             </div>
@@ -52,11 +55,11 @@ export default function EducationSection({
                   <div>
                     <div className="text-sm font-medium text-ink">{c.name}</div>
                     <div className="mt-0.5 font-mono text-[11px] text-muted">
-                      {c.issuer} · issued {c.issued} · expires {c.expires}
+                      {c.issuer} · {t.certIssued} {c.issued} · {t.certExpires} {c.expires}
                     </div>
                   </div>
                   <span className="font-mono text-[11px] text-muted">
-                    id: {c.credentialId}
+                    {t.credentialId}: {c.credentialId}
                   </span>
                 </li>
               ))}

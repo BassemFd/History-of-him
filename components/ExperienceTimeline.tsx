@@ -1,4 +1,5 @@
 import type { Experience } from "@/lib/types";
+import type { STRINGS } from "@/lib/strings";
 import { SectionLabel } from "./StatsSection";
 import GlitchText from "./GlitchText";
 
@@ -6,13 +7,15 @@ import GlitchText from "./GlitchText";
 // branch. Confidential roles render narrative only — no repo names, no links.
 export default function ExperienceTimeline({
   experience,
+  t,
 }: {
   experience: Experience[];
+  t: (typeof STRINGS)["en"];
 }) {
   return (
     <section id="experience" className="border-b border-rule">
       <div className="max-w-3xl px-6 py-14 lg:px-16">
-        <SectionLabel title="Releases" />
+        <SectionLabel title={t.sectionReleases} />
 
         <div className="relative mt-8 pl-8">
           <span className="spine-line absolute left-[7px] top-2 bottom-2 w-px bg-rule" />
@@ -34,16 +37,16 @@ export default function ExperienceTimeline({
                   </h3>
                   {e.flagship && (
                     <span className="rounded bg-accent px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-card">
-                      Flagship
+                      {t.flagship}
                     </span>
                   )}
                   {e.confidential && (
                     <span className="rounded bg-manual-soft px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-manual">
-                      Under NDA
+                      {t.underNda}
                     </span>
                   )}
                   <span className="ml-auto font-mono text-xs text-muted">
-                    {e.start} — {e.end}
+                    {e.start} — {e.end === "present" ? t.present : e.end}
                   </span>
                 </div>
                 <p className="mt-0.5 font-mono text-xs text-accent">{e.role}</p>

@@ -1,33 +1,40 @@
 import type { Stats, ActivityMix } from "@/lib/types";
+import type { STRINGS } from "@/lib/strings";
 
 // Stats rendered as a shortlog-style datasheet: label on the left, value on the
 // right, hairline rows. Live GitHub numbers carry a small "fetched" timestamp so
 // their freshness is honest; manual numbers are marked as aggregates.
-export default function StatsSection({ stats }: { stats: Stats }) {
+export default function StatsSection({
+  stats,
+  t,
+}: {
+  stats: Stats;
+  t: (typeof STRINGS)["en"];
+}) {
   const fetched = new Date(stats.liveFetchedAt).toLocaleDateString("en-CA");
 
   const live: { label: string; value: string; note: string }[] = [
     {
-      label: "Public repositories",
+      label: t.statPublicRepos,
       value: String(stats.live.publicRepos),
       note: "github.com/BassemFd",
     },
     {
-      label: "Public PRs merged",
+      label: t.statPublicPRs,
       value: String(stats.live.mergedPRs),
-      note: "authored, public repos only",
+      note: t.statPublicPRsNote,
     },
     {
-      label: "Stars earned",
+      label: t.statStarsEarned,
       value: String(stats.live.totalStars),
-      note: "on own projects",
+      note: t.statStarsNote,
     },
   ];
 
   return (
     <section id="stats" className="border-b border-rule">
       <div className="max-w-3xl px-6 py-14 lg:px-16">
-        <SectionLabel title="Shortlog" />
+        <SectionLabel title={t.sectionShortlog} />
 
         <div className="mt-8 grid gap-px overflow-hidden rounded-lg border border-rule bg-rule sm:grid-cols-2">
           {stats.manual.map((s) => (
@@ -37,6 +44,7 @@ export default function StatsSection({ stats }: { stats: Stats }) {
               value={s.value}
               note={s.note}
               source="manual"
+              t={t}
             />
           ))}
           {live.map((s) => (
@@ -46,17 +54,16 @@ export default function StatsSection({ stats }: { stats: Stats }) {
               value={s.value}
               note={s.note}
               source="live"
+              t={t}
             />
           ))}
         </div>
 
         <p className="mt-3 font-mono text-xs text-muted">
-          Live figures fetched from the GitHub API on {fetched}. Aggregate
-          production figures are recorded manually from private employer
-          codebases.
+          {t.liveFiguresNote(fetched)}
         </p>
 
-        <ActivityMixBlock activity={stats.activity} />
+        <ActivityMixBlock activity={stats.activity} t={t} />
       </div>
     </section>
   );
@@ -66,12 +73,18 @@ export default function StatsSection({ stats }: { stats: Stats }) {
 // bars — a single-series composition, so one accent hue carries magnitude and each
 // row is directly labeled. Sourced manually: GitHub's API does not expose the
 // per-type breakdown of private contributions, so it can't be fetched live.
-function ActivityMixBlock({ activity }: { activity: ActivityMix }) {
+function ActivityMixBlock({
+  activity,
+  t,
+}: {
+  activity: ActivityMix;
+  t: (typeof STRINGS)["en"];
+}) {
   return (
     <div className="mt-12">
       <div className="flex items-center gap-3">
         <h3 className="font-display text-base font-semibold text-ink">
-          Activity mix
+          {t.activityMix}
         </h3>
         <span className="h-px flex-1 bg-rule" />
       </div>
@@ -96,7 +109,7 @@ function ActivityMixBlock({ activity }: { activity: ActivityMix }) {
       </div>
 
       <p className="mt-3 flex items-center gap-2 font-mono text-[11px] text-muted">
-        <span className="text-manual">○ manual</span>
+        <span className="text-manual">○ {t.manualLabel}</span>
         <span>{activity.note}</span>
       </p>
     </div>
@@ -108,11 +121,13 @@ function StatRow({
   value,
   note,
   source,
+  t,
 }: {
   label: string;
   value: string;
   note: string;
   source: "manual" | "live";
+  t: (typeof STRINGS)["en"];
 }) {
   return (
     <div className="crazy-item flex items-baseline justify-between gap-4 bg-card px-5 py-5">
@@ -120,7 +135,7 @@ function StatRow({
         <div className="text-sm font-medium text-ink">{label}</div>
         <div className="mt-0.5 flex items-center gap-2 font-mono text-[11px] text-muted">
           <span className={source === "live" ? "text-live" : "text-manual"}>
-            {source === "live" ? "● live" : "○ manual"}
+            {source === "live" ? `● ${t.liveLabel}` : `○ ${t.manualLabel}`}
           </span>
           <span>{note}</span>
         </div>
