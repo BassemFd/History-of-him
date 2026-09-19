@@ -6,15 +6,16 @@ import { useTheme } from "./ThemeProvider";
 // Content tilts with scroll velocity and eases back to flat at rest — a small
 // vanilla version of the Locomotive/Lenis skew effect, driven by native
 // scroll events rather than a scroll-hijacking library, so keyboard/wheel/
-// touch scrolling stays untouched. Crazy mode turns the same mechanism up a
-// lot — bigger swing, slower settle — instead of adding a second effect.
+// touch scrolling stays untouched. Crazy mode only — light/dark stay flat.
 export default function ScrollSkew({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
-  const themeRef = useRef(theme);
-  themeRef.current = theme;
 
   useEffect(() => {
+    if (theme !== "crazy") {
+      if (ref.current) ref.current.style.transform = "";
+      return;
+    }
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let lastY = window.scrollY;
@@ -26,15 +27,9 @@ export default function ScrollSkew({ children }: { children: React.ReactNode }) 
       const velocity = y - lastY;
       lastY = y;
 
-      const crazy = themeRef.current === "crazy";
-      const max = crazy ? 14 : 3;
-      const sensitivity = crazy ? 0.4 : 0.15;
-      const ease = crazy ? 0.35 : 0.25;
-      const decay = crazy ? 0.93 : 0.85;
-
-      const target = Math.max(-max, Math.min(max, velocity * sensitivity));
-      skew += (target - skew) * ease;
-      skew *= decay;
+      const target = Math.max(-14, Math.min(14, velocity * 0.4));
+      skew += (target - skew) * 0.35;
+      skew *= 0.93;
 
       if (ref.current) {
         ref.current.style.transform = `skewY(${skew.toFixed(3)}deg)`;
@@ -44,7 +39,7 @@ export default function ScrollSkew({ children }: { children: React.ReactNode }) 
 
     raf = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(raf);
-  }, []);
+  }, [theme]);
 
   return (
     <div ref={ref} style={{ willChange: "transform" }}>
